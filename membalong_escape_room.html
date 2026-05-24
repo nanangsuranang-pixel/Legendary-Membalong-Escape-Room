@@ -1,0 +1,1555 @@
+<!doctype html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Membalong Escape Room Challenge</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    @keyframes flicker {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.85; }
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
+      50% { box-shadow: 0 0 40px rgba(212, 175, 55, 0.6); }
+    }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-10px); }
+      75% { transform: translateX(10px); }
+    }
+    .animate-slide-up { animation: slideUp 0.6s ease forwards; }
+    .animate-flicker { animation: flicker 3s ease-in-out infinite; }
+    .animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+    .animate-shake { animation: shake 0.4s ease; }
+    .stagger-1 { animation-delay: 0.1s; opacity: 0; }
+    .stagger-2 { animation-delay: 0.2s; opacity: 0; }
+    .stagger-3 { animation-delay: 0.3s; opacity: 0; }
+    .stagger-4 { animation-delay: 0.4s; opacity: 0; }
+    .stagger-5 { animation-delay: 0.5s; opacity: 0; }
+    body { box-sizing: border-box; }
+    
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: rgba(69, 26, 3, 0.5); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb { background: rgba(217, 119, 6, 0.8); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(245, 158, 11, 1); }
+  </style>
+</head>
+<body class="h-full">
+  <div id="app" class="h-full w-full overflow-auto" style="background: linear-gradient(135deg, #1a0a2e 0%, #16213e 30%, #0f3460 60%, #1a0a2e 100%); font-family: 'Crimson Text', serif;">
+    
+    <!-- SCREEN 1: HOME -->
+    <div id="screen-home" class="min-h-full w-full flex flex-col items-center justify-center px-4 py-8">
+      <div class="max-w-3xl w-full">
+        <!-- Title Section -->
+        <div class="text-center mb-8 animate-slide-up">
+          <div class="text-7xl mb-4 animate-flicker">🏴‍☠️</div>
+          <h1 class="text-5xl md:text-7xl font-black text-amber-300 mb-2" style="font-family: 'Cinzel', serif;">Legendary Membalong</h1>
+          <h2 class="text-3xl md:text-4xl font-bold text-amber-400 mb-2" style="font-family: 'Cinzel', serif;">Escape Room</h2>
+          <p class="text-amber-100/70 text-lg italic">Unlock the Secrets. Claim Your Glory.</p>
+        </div>
+        
+        <!-- Treasure Chest Visualization -->
+        <div class="flex justify-center gap-8 mb-8 animate-slide-up stagger-1">
+          <div class="text-6xl animate-pulse-glow">🗺️</div>
+          <div class="text-8xl">🔐</div>
+          <div class="text-6xl animate-pulse-glow">🔑</div>
+        </div>
+        
+        <!-- Mission Briefing Card -->
+        <div class="bg-gradient-to-b from-purple-900/40 to-amber-900/30 backdrop-blur border-2 border-amber-500/40 rounded-2xl p-8 mb-8 animate-slide-up stagger-2">
+          <div class="text-center mb-6">
+            <h2 class="text-3xl font-bold text-amber-300 mb-2" style="font-family: 'Cinzel', serif;">🧩 Your Mission</h2>
+            <p class="text-amber-100/80 text-sm italic">Today, you and your team are chosen as the New Guardians.</p>
+          </div>
+          <div class="space-y-3 mb-8 text-left max-h-64 overflow-y-auto pr-2">
+            <div class="bg-blue-900/30 border-l-4 border-blue-500 pl-4 py-3 rounded hover:bg-blue-900/50 transition">
+              <p class="text-blue-300 font-bold text-sm">🏔️ Level 1 - The Majestic Rock: Explore the sacred granite formations of Batu Baginde.</p>
+            </div>
+            <div class="bg-orange-900/30 border-l-4 border-orange-500 pl-4 py-3 rounded hover:bg-orange-900/50 transition">
+              <p class="text-orange-300 font-bold text-sm">👨‍🍳 Level 2 - The Taste of Gangan: Master the traditional recipe and test your writing skills.</p>
+            </div>
+            <div class="bg-indigo-900/30 border-l-4 border-indigo-500 pl-4 py-3 rounded hover:bg-indigo-900/50 transition">
+              <p class="text-indigo-300 font-bold text-sm">👂 Level 3 - The Voice from the Ancestors: Listen to the ancestral echoes and test your listening skills.</p>
+            </div>
+            <div class="bg-emerald-900/30 border-l-4 border-emerald-500 pl-4 py-3 rounded hover:bg-emerald-900/50 transition">
+              <p class="text-emerald-300 font-bold text-sm">🎨 Level 4 - The Artisan's Riddle: Solve the mysteries of traditional craftsmanship.</p>
+            </div>
+            <div class="bg-pink-900/30 border-l-4 border-pink-500 pl-4 py-3 rounded hover:bg-pink-900/50 transition">
+              <p class="text-pink-300 font-bold text-sm">🍡 Level 5 - The Sweet Floating Delight: Master the secrets of Bugis Berendam.</p>
+            </div>
+            <div class="bg-purple-900/30 border-l-4 border-purple-500 pl-4 py-3 rounded hover:bg-purple-900/50 transition">
+              <p class="text-purple-300 font-bold text-sm">🗺️ Level 6 - The Legend of Putri Pinang Gading: Listen to the tale of the brave archery princess and test your listening skills.</p>
+            </div>
+            <div class="bg-green-900/30 border-l-4 border-green-500 pl-4 py-3 rounded hover:bg-green-900/50 transition">
+              <p class="text-green-300 font-bold text-sm">🌿 Level 7 - The Eco-Tourism Peak: Experience the natural bath and conservation efforts of Gunung Kubing.</p>
+            </div>
+            <div class="bg-yellow-900/30 border-l-4 border-yellow-500 pl-4 py-3 rounded hover:bg-yellow-900/50 transition">
+              <p class="text-yellow-300 font-bold text-sm">🗣️ Level 8 - The Harvest Celebration (Speaking Test): Read and speak the correct answer aloud.</p>
+            </div>
+            <div class="bg-cyan-900/30 border-l-4 border-cyan-500 pl-4 py-3 rounded hover:bg-cyan-900/50 transition">
+              <p class="text-cyan-300 font-bold text-sm">🧠 Level 9 - The Ancient Dialect: Translate the unique vocabulary of the Belantu dialect.</p>
+            </div>
+            <div class="bg-red-900/30 border-l-4 border-red-500 pl-4 py-3 rounded hover:bg-red-900/50 transition">
+              <p class="text-red-300 font-bold text-sm">⚔️ Level 10 - The Duel of Honor: Master the legendary warrior traditions.</p>
+            </div>
+          </div>
+          <!-- Final Goal -->
+          <div class="bg-purple-900/50 border border-purple-500/50 rounded-lg p-4 mb-6">
+            <p class="text-purple-300 font-bold text-center mb-2">🔐 The Final Goal</p>
+            <p class="text-purple-100/80 text-sm text-center">Each mission gives you a piece of a Secret Code. Collect all digits to unlock the chest and claim your title as a <strong>Global Ambassador</strong>.</p>
+          </div>
+          <div class="text-center border-t border-amber-500/30 pt-4">
+            <p class="text-amber-300 text-lg font-bold italic mb-2">"Our culture is our soul. Let's tell our story to the world!"</p>
+          </div>
+        </div>
+        
+        <!-- Start CTA -->
+        <div class="text-center mt-8 animate-slide-up stagger-4 mb-12">
+          <button onclick="goToRules()" class="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold py-4 px-10 rounded-lg transition-all shadow-[0_0_15px_rgba(245,158,11,0.5)] hover:shadow-[0_0_25px_rgba(245,158,11,0.8)] text-xl">
+            🚀 Ready to Begin?
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 1B: RULES -->
+    <div id="screen-rules" class="min-h-full w-full flex flex-col items-center justify-center px-4 py-8" style="display: none;">
+      <div class="max-w-2xl w-full text-center">
+        <div class="animate-slide-up">
+          <div class="text-6xl mb-4">⚠️</div>
+          <h1 class="text-4xl font-bold text-amber-300 mb-2" style="font-family: 'Cinzel', serif;">Rules of the Game</h1>
+          <p class="text-amber-100/70 text-lg mb-8">Know before you play!</p>
+        </div>
+        <div class="bg-white/5 backdrop-blur border border-amber-400/20 rounded-2xl p-8 animate-slide-up stagger-1">
+          <div class="bg-red-900/30 border border-red-500/30 rounded-lg p-6 text-left mb-8">
+            <ul class="space-y-4 text-red-100/80">
+              <li class="flex gap-3"><span class="text-red-300 font-bold text-xl min-w-fit">✓</span> <span><strong class="text-red-300">Read Carefully:</strong> The context text holds the answers.</span></li>
+              <li class="flex gap-3"><span class="text-amber-300 font-bold text-xl min-w-fit">📊</span> <span><strong class="text-amber-300">Pass Requirement:</strong> You must score at least 80% correct to pass a level.</span></li>
+              <li class="flex gap-3"><span class="text-amber-300 font-bold text-xl min-w-fit">❤️</span> <span><strong class="text-amber-300">7 Lives:</strong> You have 7 lives for all levels. Wrong answers cost 1 life.</span></li>
+              <li class="flex gap-3"><span class="text-green-300 font-bold text-xl min-w-fit">⭐</span> <span><strong class="text-green-300">Scoring:</strong> Correct answers give 2 pts (1 pt for Level 9). Max 10 pts per level!</span></li>
+              <li class="flex gap-3"><span class="text-purple-300 font-bold text-xl min-w-fit">✨</span> <span><strong class="text-purple-300">Ask Ancestors:</strong> Stuck? Use the Gemini AI button to ask the Ancestral Spirits for a hint!</span></li>
+              <li class="flex gap-3"><span class="text-amber-500 font-bold text-xl min-w-fit">🔐</span> <span><strong class="text-amber-500">Bonus Codes:</strong> Complete a level successfully to receive one digit of the final vault code.</span></li>
+            </ul>
+          </div>
+          <div class="flex gap-4">
+            <button onclick="goHome()" class="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 rounded-lg transition-all"> ← Back </button> 
+            <button onclick="goToNameInput()" class="flex-1 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold py-3 rounded-lg transition-all"> Continue → </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 1C: NAME INPUT -->
+    <div id="screen-name-input" class="min-h-full w-full flex flex-col items-center justify-center px-4 py-8" style="display: none;">
+      <div class="max-w-2xl w-full text-center">
+        <div class="animate-slide-up">
+          <div class="text-6xl mb-4">✍️</div>
+          <h1 class="text-4xl font-bold text-amber-300 mb-2" style="font-family: 'Cinzel', serif;">Enter Names</h1>
+          <p class="text-amber-100/70 text-lg mb-8">Who's playing today?</p>
+        </div>
+        <div class="bg-white/5 backdrop-blur border border-amber-400/20 rounded-2xl p-8 animate-slide-up stagger-1">
+          
+          <div class="mb-8">
+            <h3 class="text-2xl font-bold text-amber-300 mb-6 text-center" style="font-family: 'Cinzel', serif;">Select Your Path</h3>
+            <div class="grid grid-cols-2 gap-4 mb-8">
+              <button id="btn-mode-individual" onclick="selectGameMode('individual')" class="p-6 bg-blue-900/50 border-2 border-blue-400 rounded-lg transition-all group scale-105 shadow-lg">
+                <div class="text-5xl mb-3 group-hover:scale-110 transition-transform">👤</div>
+                <p class="text-blue-300 font-bold">Individual</p>
+                <p class="text-blue-200/70 text-sm mt-2">Play Solo</p>
+              </button> 
+              <button id="btn-mode-team" onclick="selectGameMode('team')" class="p-6 bg-purple-900/30 border-2 border-purple-500/30 hover:border-purple-400 hover:bg-purple-900/50 rounded-lg transition-all group">
+                <div class="text-5xl mb-3 group-hover:scale-110 transition-transform">👥</div>
+                <p class="text-purple-300 font-bold">Team</p>
+                <p class="text-purple-200/70 text-sm mt-2">Play Together</p>
+              </button>
+            </div>
+          </div>
+          
+          <div id="name-inputs-container" class="space-y-4 mb-8 text-left">
+            <div>
+              <label class="block text-amber-300 mb-2 font-bold">Player Name</label>
+              <input type="text" id="player-name-1" class="w-full bg-gray-900/50 border border-amber-500/50 rounded-lg p-3 text-white focus:outline-none focus:border-amber-400" placeholder="Enter your name...">
+            </div>
+          </div>
+          
+          <div class="flex gap-4">
+            <button onclick="goToRules()" class="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 rounded-lg transition-all"> ← Back </button> 
+            <button onclick="startChallenge()" class="flex-1 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold py-3 rounded-lg transition-all"> 🚀 Start Challenge </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 2: LEVEL -->
+    <div id="screen-level" class="min-h-full w-full flex flex-col px-4 py-8" style="display: none;">
+      <div class="max-w-4xl mx-auto w-full">
+        <!-- Header -->
+        <div class="mb-6 flex justify-between items-center flex-wrap gap-4 animate-slide-up">
+          <div>
+            <h1 class="text-3xl font-bold text-amber-300" style="font-family: 'Cinzel', serif;" id="level-title-display">Level 1: Title</h1>
+            <p class="text-amber-100/70 text-sm mt-1" id="player-display"></p>
+          </div>
+          <div class="flex gap-4 items-center">
+            <div id="lives-container" class="bg-red-900/40 border border-red-500/30 rounded-lg px-4 py-2 flex items-center gap-2 transition-colors">
+              <span class="text-xl">❤️</span> <span class="text-red-300 font-bold"><span id="lives-remaining">7</span>/7</span>
+            </div>
+            <div class="bg-amber-900/40 border border-amber-500/30 rounded-lg px-4 py-2">
+              <span class="text-amber-300 font-bold"><span id="score-display">0</span> pts</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Progress -->
+        <div class="mb-8 bg-white/5 rounded-lg p-4 border border-amber-400/20 animate-slide-up stagger-1">
+          <div class="flex justify-between mb-2">
+            <span class="text-amber-100/80 font-bold">Question <span id="question-number">1</span>/5</span> 
+            <span class="text-amber-100/80" id="progress-text">Level Progress</span>
+          </div>
+          <div class="w-full bg-gray-800/50 rounded-full h-3 overflow-hidden border border-amber-400/20">
+            <div id="progress-bar" class="bg-gradient-to-r from-amber-500 to-orange-500 h-full transition-all duration-500" style="width: 0%"></div>
+          </div>
+        </div>
+        
+        <!-- Context Section -->
+        <div id="context-container" class="mb-8 bg-blue-900/20 border border-blue-500/30 rounded-lg p-6 max-h-64 overflow-y-auto animate-slide-up stagger-2">
+          <p class="text-sm text-blue-300 font-bold mb-2">📖 Context / Lore:</p>
+          
+          <!-- Text View -->
+          <div id="text-context-view">
+            <p id="context-text" class="text-amber-100/90 leading-relaxed text-sm md:text-base whitespace-pre-wrap"></p>
+          </div>
+
+          <!-- Audio View (For Listening Skills) -->
+          <div id="audio-context-view" style="display: none;" class="text-center py-4">
+            <div class="text-5xl mb-4 animate-pulse">🎧</div>
+            <p class="text-amber-100/80 mb-4 font-bold">Listening Test Mode</p>
+            <p class="text-amber-100/60 mb-6 text-sm">Listen carefully to the voice to answer the questions.</p>
+            <button id="btn-play-audio" onclick="toggleAudio()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-full transition-all shadow-[0_0_15px_rgba(79,70,229,0.5)]">
+               ▶️ Play Audio
+            </button>
+          </div>
+        </div>
+        
+        <!-- Question Area -->
+        <div class="mb-8 bg-white/5 backdrop-blur border border-amber-400/20 rounded-lg p-6 animate-slide-up stagger-3">
+          <div class="flex justify-between items-start mb-6">
+            <h2 id="question-text" class="text-xl md:text-2xl font-bold text-amber-300" style="font-family: 'Cinzel', serif;"></h2>
+            
+            <!-- Gemini Hint Button -->
+            <button id="btn-hint" onclick="consultAncestors()" class="shrink-0 ml-4 bg-purple-900/60 hover:bg-purple-700 text-purple-200 font-bold py-2 px-4 rounded-lg transition-all border border-purple-400/50 shadow-[0_0_10px_rgba(168,85,247,0.3)] hover:shadow-[0_0_15px_rgba(168,85,247,0.6)] text-sm flex items-center gap-2 group">
+              ✨ <span class="hidden sm:inline">Consult Ancestors</span>
+            </button>
+          </div>
+
+          <!-- Gemini Hint Display -->
+          <div id="hint-container" class="mb-6 bg-gradient-to-r from-purple-900/60 to-indigo-900/60 border-l-4 border-purple-400 rounded-r-lg p-4 text-purple-100 text-sm hidden animate-slide-up">
+             <div class="flex items-start gap-3">
+               <span class="text-2xl">👻</span>
+               <div id="hint-text" class="italic leading-relaxed"></div>
+             </div>
+          </div>
+          
+          <!-- Options -->
+          <div id="options-container" class="space-y-3">
+            <!-- Options will be populated here -->
+          </div>
+        </div>
+        
+        <div id="feedback-message" class="text-center font-bold text-lg mb-4 h-8 transition-opacity opacity-0"></div>
+      </div>
+    </div>
+
+    <!-- SCREEN 3: RESULT -->
+    <div id="screen-result" class="min-h-full w-full flex flex-col items-center justify-center px-4 py-8" style="display: none;">
+      <div class="max-w-2xl w-full text-center">
+        <div id="result-icon" class="text-6xl mb-4 animate-flicker">✓</div>
+        <h1 id="result-title" class="text-4xl font-bold text-amber-300 mb-4" style="font-family: 'Cinzel', serif;">Level Complete!</h1>
+        
+        <div class="bg-white/5 backdrop-blur border border-amber-400/20 rounded-2xl p-8 mb-6 text-left">
+          <div class="grid grid-cols-2 gap-4 mb-6">
+            <div class="bg-green-900/30 border border-green-500/20 rounded-lg p-4 text-center">
+              <p class="text-green-300/80 text-sm mb-2">Correct Answers</p>
+              <p id="result-correct" class="text-green-300 text-3xl font-bold">5/5</p>
+            </div>
+            <div class="bg-amber-900/30 border border-amber-500/20 rounded-lg p-4 text-center">
+              <p class="text-amber-300/80 text-sm mb-2">Score Earned</p>
+              <p id="result-score" class="text-amber-300 text-3xl font-bold">10 pts</p>
+            </div>
+          </div>
+          
+          <div id="bonus-code-container" class="bg-purple-900/30 border border-purple-500/30 rounded-lg p-4 mb-6" style="display: none;">
+            <p class="text-purple-300/80 text-sm mb-2">🔐 Your Bonus Digit:</p>
+            <p id="bonus-code" class="text-purple-300 text-4xl text-center font-bold font-mono tracking-widest">5</p>
+            <p class="text-purple-300/60 text-center text-xs mt-2">Collect all digits to unlock the treasure!</p>
+          </div>
+          
+          <p id="result-message" class="text-amber-100/90 text-center mb-6"></p>
+
+          <!-- Leaderboard Status for Game Over -->
+          <div id="gameover-leaderboard-status" class="bg-blue-900/30 border border-blue-500/30 rounded-lg p-4 mb-6 hidden">
+             <p id="gameover-leaderboard-text" class="text-blue-300 text-sm font-bold animate-pulse text-center">📡 Sending your final score to Host's Database...</p>
+          </div>
+        </div>
+        
+        <div class="flex gap-4 flex-col sm:flex-row">
+          <button onclick="retryLevel()" id="retry-btn" class="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-lg transition-all" style="display: none;"> 🔄 Retry Level </button> 
+          <button onclick="nextLevel()" id="next-level-btn" class="flex-1 bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 rounded-lg transition-all shadow-[0_0_15px_rgba(245,158,11,0.3)]"> Next Level → </button> 
+          <button onclick="goHome()" class="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 rounded-lg transition-all"> Home </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 3.5: VAULT / BONUS LEVEL -->
+    <div id="screen-vault" class="min-h-full w-full flex flex-col items-center justify-center px-4 py-8" style="display: none;">
+      <div class="max-w-2xl w-full text-center">
+        <div id="vault-icon" class="text-8xl mb-6 animate-pulse-glow">🔒</div>
+        <h1 class="text-4xl font-bold text-amber-300 mb-4" style="font-family: 'Cinzel', serif;">The Ancient Chest</h1>
+        
+        <!-- Lock Section -->
+        <div id="vault-lock-section" class="bg-white/5 backdrop-blur border border-amber-400/20 rounded-2xl p-8 mb-6">
+          <p class="text-amber-100/90 mb-6 text-lg">Enter the 10-digit code you collected from the Ancestors to unlock the final secret.</p>
+          <input type="text" id="vault-input" maxlength="10" class="w-full text-center bg-gray-900/80 border-2 border-amber-500/50 rounded-lg p-4 text-white text-3xl tracking-[0.5em] sm:tracking-[1em] font-mono focus:outline-none focus:border-amber-400 mb-6" placeholder="..........">
+          <button onclick="verifyVaultCode()" class="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold py-4 rounded-lg transition-all text-xl shadow-[0_0_15px_rgba(245,158,11,0.5)]">
+            🔑 Unlock Chest
+          </button>
+          <p id="vault-error" class="text-red-400 mt-4 h-6 opacity-0 transition-opacity font-bold"></p>
+        </div>
+
+        <!-- Success Section -->
+        <div id="vault-success-section" class="bg-white/5 backdrop-blur border border-green-400/30 rounded-2xl p-8 mb-6 hidden animate-slide-up">
+           <h2 class="text-green-300 text-2xl font-bold mb-4" style="font-family: 'Cinzel', serif;">Chest Unlocked!</h2>
+           <div class="bg-indigo-900/40 border border-indigo-400/30 rounded-lg p-6 mb-6 relative">
+              <span class="text-4xl absolute -top-4 -left-4">📜</span>
+              <p class="text-amber-100/90 italic text-lg leading-relaxed">"Congratulations, Guardians of Membalong! You have successfully unlocked the Ancient Chest. Inside, you find a message: 'Our culture is our soul. Use your English to tell our stories to the world.' You are now ready to be a Global Ambassador for Membalong!"</p>
+           </div>
+           <button onclick="showFinalScreen()" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 rounded-lg transition-all text-xl shadow-[0_0_15px_rgba(34,197,94,0.4)]">
+             View Your Certificate 🏆
+           </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 4: FINAL RESULT -->
+    <div id="screen-final" class="min-h-full w-full flex flex-col items-center justify-center px-4 py-8" style="display: none;">
+      <div class="max-w-2xl w-full text-center">
+        <div class="text-7xl mb-4 animate-flicker">🏆</div>
+        <h1 class="text-4xl font-bold text-amber-300 mb-4" style="font-family: 'Cinzel', serif;">Challenge Completed!</h1>
+        
+        <div class="bg-white/5 backdrop-blur border border-amber-400/20 rounded-2xl p-8 mb-6">
+          <p class="text-amber-100/90 text-xl mb-8">Congratulations, you are now Global Ambassadors of Membalong!</p>
+          
+          <div class="bg-purple-900/30 border border-purple-500/30 rounded-lg p-6 mb-6">
+            <p class="text-purple-300/80 text-sm mb-3">🔐 The Vault is Unlocked. Final Code:</p>
+            <p id="final-bonus-code" class="text-purple-300 text-3xl md:text-4xl font-bold font-mono mb-2 tracking-widest break-all">X-X-X-X-X-X-X-X-X-X</p>
+            <p class="text-purple-300/60 text-sm">Your achievement and cultural knowledge have been immortalized!</p>
+          </div>
+          
+          <div class="grid grid-cols-2 gap-4 mb-8">
+            <div class="bg-green-900/30 border border-green-500/20 rounded-lg p-4">
+              <p class="text-green-300/80 text-sm mb-2">Levels Conquered</p>
+              <p class="text-green-300 text-2xl font-bold">10/10</p>
+            </div>
+            <div class="bg-amber-900/30 border border-amber-500/20 rounded-lg p-4">
+              <p class="text-amber-300/80 text-sm mb-2">Total Points</p>
+              <p id="total-points" class="text-amber-300 text-2xl font-bold">0</p>
+            </div>
+          </div>
+
+          <!-- Leaderboard Status Indicator -->
+          <div id="leaderboard-status" class="bg-blue-900/30 border border-blue-500/30 rounded-lg p-4 mb-6 hidden">
+             <p id="leaderboard-text" class="text-blue-300 text-sm font-bold animate-pulse">📡 Sending score to Host's Database...</p>
+          </div>
+        </div>
+        
+        <button onclick="goHome()" class="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold py-4 rounded-lg transition-all text-xl shadow-[0_0_15px_rgba(245,158,11,0.5)]"> 
+          Play Again 
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- GEMINI API SETUP ---
+    const apiKey = ""; // API Key provided by runtime environment
+
+    // --- GOOGLE SHEETS INTEGRATION ---
+    // PASTE URL WEB APP ANDA YANG BARU DI BAWAH INI (pastikan diakhiri dengan /exec)
+    const GOOGLE_SHEET_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbx9vpJEOScyLVTEXOgAIIY_kWIZDrsZuUNOfK9VXvzbfG1IG3nTY3bqT5537NtJmyH-Gg/exec"; 
+
+    async function saveScoreToLeaderboard(isGameOver = false) {
+      if (!GOOGLE_SHEET_WEBAPP_URL || GOOGLE_SHEET_WEBAPP_URL === "") return;
+
+      let statusBox, statusText;
+      
+      // Pilih elemen UI berdasarkan layar mana yang sedang aktif
+      if (isGameOver) {
+        statusBox = document.getElementById('gameover-leaderboard-status');
+        statusText = document.getElementById('gameover-leaderboard-text');
+      } else {
+        statusBox = document.getElementById('leaderboard-status');
+        statusText = document.getElementById('leaderboard-text');
+      }
+
+      statusBox.classList.remove('hidden');
+
+      try {
+        // Menggunakan metode GET yang lebih ramah browser (CORS-friendly)
+        const url = new URL(GOOGLE_SHEET_WEBAPP_URL);
+        // Menambahkan penanda pada nama jika Game Over
+        const statusMarker = isGameOver ? " (Game Over - Lv " + (currentLevel + 1) + ")" : " (Tamat)";
+        url.searchParams.append('name', playerNames.join(" | ") + statusMarker);
+        url.searchParams.append('score', totalScore);
+        url.searchParams.append('mode', gameMode);
+        url.searchParams.append('codes', collectedCodes.join(''));
+
+        await fetch(url, {
+          method: 'GET',
+          mode: 'no-cors' // Penting agar browser tidak memblokir
+        });
+        
+        // Ubah tampilan sukses
+        statusBox.classList.replace('bg-blue-900/30', 'bg-green-900/30');
+        statusBox.classList.replace('border-blue-500/30', 'border-green-500/30');
+        statusText.classList.replace('text-blue-300', 'text-green-300');
+        statusText.classList.remove('animate-pulse');
+        statusText.innerText = "✅ Score successfully recorded by the Host!";
+      } catch (error) {
+        console.error("Error saving score:", error);
+        // Ubah tampilan gagal
+        statusBox.classList.replace('bg-blue-900/30', 'bg-red-900/30');
+        statusBox.classList.replace('border-blue-500/30', 'border-red-500/30');
+        statusText.classList.replace('text-blue-300', 'text-red-300');
+        statusText.classList.remove('animate-pulse');
+        statusText.innerText = "❌ Failed to send score. Please screenshot this page for the Host.";
+      }
+    }
+
+    async function callGeminiAPI(prompt) {
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+      const payload = {
+        contents: [{ parts: [{ text: prompt }] }],
+        systemInstruction: { 
+          parts: [{ text: "You are the wise Ancestral Spirit of Membalong. You provide short, cryptic, but helpful hints for students playing an educational escape room game about Belitung culture. Never reveal the exact answer. Reply in English with a mystical tone." }] 
+        }
+      };
+
+      let retries = 5;
+      let delay = 1000;
+      
+      for (let i = 0; i < retries; i++) {
+        try {
+          const response = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          
+          if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+          
+          const data = await response.json();
+          return data.candidates?.[0]?.content?.parts?.[0]?.text || "The spiritual connection is weak...";
+        } catch (error) {
+          if (i === retries - 1) return "The ancestors are currently silent. You must rely on your own wisdom to proceed.";
+          await new Promise(res => setTimeout(res, delay));
+          delay *= 2;
+        }
+      }
+    }
+
+    async function consultAncestors() {
+      const hintContainer = document.getElementById('hint-container');
+      const hintText = document.getElementById('hint-text');
+      const btnHint = document.getElementById('btn-hint');
+
+      // Show loading state
+      hintContainer.style.display = 'block';
+      hintText.innerHTML = '<span class="animate-pulse">Channeling the spirits for guidance...</span>';
+      btnHint.disabled = true;
+      btnHint.classList.add('opacity-50', 'cursor-not-allowed');
+
+      const level = levelData[currentLevel];
+      const qData = level.questions[currentQuestion];
+      
+      // Craft the prompt based on current context and question
+      const prompt = `The player is stuck on this question: "${qData.q}". 
+The context/lore they read is: "${level.context}".
+Provide a short, mystical hint (1-2 sentences max) to help them find the answer without directly stating the correct answer.`;
+
+      // Call Gemini API
+      const hint = await callGeminiAPI(prompt);
+      
+      // Display the result
+      hintText.innerHTML = hint;
+      
+      // Keep button disabled for this question so they don't spam the API
+      btnHint.innerHTML = '✨ Ancestors Consulted';
+    }
+
+
+    // --- GAME STATE ---
+    let currentLevel = 0;
+    let currentQuestion = 0;
+    let totalScore = 0;
+    let lives = 7;
+    let levelCorrectAnswers = 0;
+    let gameMode = 'individual'; 
+    let playerNames = []; 
+    let collectedCodes = [];
+    let questionAnswered = false; // Flag to prevent multiple clicks per question
+    let vaultAttempts = 0; // Pelacak percobaan brankas
+
+    // --- GAME DATA ---
+    const levelData = [
+      {
+        title: "🏔️ Level 1: The Majestic Rock",
+        context: `In the southern part of Belitung Island, specifically in Padang Kandis, two giant granite stones stand proudly against the sky. These are known as Batu Baginde. They are not just ordinary rocks; they are massive monoliths that have existed for millions of years. Geologically, these stones are part of the ancient granite formations that make Belitung famous, but to the local people, they are much more.
+
+Batu Baginde consists of two main boulders, often called the "Male" and "Female" rocks. The "Male" rock is larger and stands taller, providing a challenging climb for those brave enough to reach its summit. The surface of the granite is weathered and smooth in some parts, while other areas are covered in moss and small shrubs that manage to grow in the cracks.
+
+The journey to the foot of the rock takes you through a dense tropical forest. As you walk, the air feels humid, and you can hear the sounds of wild birds and insects. Once you reach the base, the sheer size of the rock makes you feel very small. Climbing to the top requires energy and caution, often using ropes provided by local guides. However, the reward at the top is a breathtaking 360-degree view of the island. You can see the green canopy of the forest meeting the turquoise blue of the Java Sea. It is a place of silence and majesty, reminding everyone of the raw beauty of nature.`,
+        questions: [
+          { q: "Where is Batu Baginde located?", opts: ["Northern coastal Belitung", "Tanjung Pandan City", "Padang Kandis, South Belitung", "Perpat hill, Membalong", "Seliu island, Membalong"], ans: 2 },
+          { q: "What is the main physical characteristic of Batu Baginde described in the text?", opts: ["It is made of volcanic limestone.", "It consists of two massive ancient granite monoliths.", "It is a cave system hidden underground.", "It is a collection of small pebbles on the beach.", "It is a man-made monument for ancestors."], ans: 1 },
+          { q: "According to the text, what must a visitor do to enjoy the 360-degree view?", opts: ["Swim across the Java Sea", "Walk through the city center", "Fly a drone from the forest", "Climb the \"Male\" rock with caution and energy", "Wait for the moss to disappear"], ans: 3 },
+          { q: "Why does the author mention that the rocks make the visitor \"feel very small\"?", opts: ["Because the forest is very dark and scary.", "To emphasize the overwhelming scale and majesty", "Because the visitor is actually shrinking.", "To discourage people from visiting the site.", "Because the trail is very narrow."], ans: 1 },
+          { q: "What can be inferred about the relationship between nature and the local people from the text?", opts: ["Locals ignore the rocks because they are too high.", "The rocks are only valued for their tin content.", "Rocks are, both geological and symbolic.", "The locals have turned the rocks into a modern shopping mall.", "People only visit the rocks to study the insects."], ans: 2 }
+        ]
+      },
+      {
+        title: "👨‍🍳 Level 2: The Taste of Gangan",
+        context: `If you visit Belitung, you haven't truly arrived until you taste Gangan. Gangan is a traditional yellow fish soup that perfectly represents the island's coastal soul. The soup is famous for its spicy, savory, and refreshing sour taste, which comes from a blend of local spices and fresh pineapples. The most common fish used is "Ikan Ketarap" or Red Snapper, known for its firm and sweet meat.
+
+How to Make Traditional Belitung Gangan:
+Ingredients:
+- 500g fresh fish (cut into pieces)
+- 1 liter of water
+- 1 small piece of young pineapple (sliced)
+- Spices to be ground: 5 shallots, 3 cloves of garlic, 2cm turmeric, 5 bird's eye chilies (adjust for spiciness), 1cm galangal, and 1 tsp of shrimp paste (terasi).
+- Salt and sugar to taste.
+
+        Steps:
+1. First, clean the fish thoroughly and set it aside.
+2. Next, prepare the spice paste by grinding the shallots, garlic, turmeric, chilies, galangal, and shrimp paste until smooth.
+3. Boil the water in a pot. Once the water starts simmering, add the ground spice paste.
+4. Add the sliced young pineapple into the pot. The pineapple is crucial because it provides the signature sourness.
+5. Carefully put the fish pieces into the boiling soup.
+6. Cook on medium heat until the fish is tender and fully cooked. Be careful not to overcook.
+7. Finally, add salt and a little sugar to balance the flavors. Taste the soup to ensure the balance is perfect.
+8. Serve the Gangan hot with a bowl of steamed white rice.`,
+        questions: [
+          { 
+            type: "text",
+            q: "Mention three specific ingredients that must be ground to make the spice paste!", 
+            correctAnswerText: "Shallots, garlic, and turmeric",
+            check: function(ans) {
+              let a = ans.toLowerCase();
+              return a.includes("shallot") && a.includes("garlic") && a.includes("turmeric");
+            }
+          },
+          { 
+            type: "text",
+            q: "What is the purpose of adding young pineapple to the Gangan soup?", 
+            correctAnswerText: "To provide the signature sourness",
+            check: function(ans) {
+              let a = ans.toLowerCase();
+              return a.includes("sour");
+            }
+          },
+          { 
+            type: "text",
+            q: "Jumbled Words: fish - and - thoroughly - clean - aside - it - the - set", 
+            correctAnswerText: "Clean the fish thoroughly and set it aside",
+            check: function(ans) {
+              let a = ans.toLowerCase().replace(/[^a-z0-9\s]/g, '').trim();
+              return a === "clean the fish thoroughly and set it aside";
+            }
+          },
+          { 
+            type: "text",
+            q: "Jumbled Words: paste - the - fragrant - stir - until - becomes - spice - aroma", 
+            correctAnswerText: "Stir the spice paste until the aroma becomes fragrant",
+            check: function(ans) {
+              let a = ans.toLowerCase().replace(/[^a-z0-9\s]/g, '').trim();
+              return a === "stir the spice paste until the aroma becomes fragrant";
+            }
+          },
+          { 
+            type: "text",
+            q: "Jumbled Words: overcook - break - not - be - to - the - careful - fish - apart - to", 
+            correctAnswerText: "Be careful not to overcook the fish to break apart",
+            check: function(ans) {
+              let a = ans.toLowerCase().replace(/[^a-z0-9\s]/g, '').trim();
+              return a === "be careful not to overcook the fish to break apart";
+            }
+          }
+        ]
+      },
+      {
+        title: "👂 Level 3: The Voice from the Ancestors",
+        isAudio: true,
+        context: `The Nirok Nanggok tradition is a unique communal fishing event in Membalong that usually takes place during the peak of the dry season, when the river water levels are at their lowest. This event is not just about catching fish; it is a profound display of community togetherness. This tradition acts as a social glue that strengthens community bonds as everyone gathers in the mud to catch fish side-by-side. Before anyone can enter the river, a local shaman known as the "Dukun Air" must perform a sacred ritual to ask for the ancestors' blessings and ensure the safety of all participants from dangerous river creatures. Participants must patiently wait for a signal from the Dukun Air to maintain the sacred order and respect the spiritual traditions of the ancestors. Interestingly, the community only uses traditional tools like the "Tirok," a wooden spear, and the "Tanggok," a bamboo basket. These traditional and selective tools reflect a deep environmental awareness, as they prevent the destruction of the ecosystem and ensure that only mature fish are caught.`,
+        questions: [
+          { q: "When does the Nirok Nanggok tradition usually take place?", opts: ["During the rainy season", "On New Year's Eve", "During the peak of the dry season", "Every Monday morning", "Only during a full moon"], ans: 2 },
+          { q: "What is the role of the 'Dukun Air' in this tradition?", opts: ["To catch the most fish using a modern net.", "To sell the fish to the market.", "To perform rituals for community safety.", "To cook the Gangan for all participants.", "To build the bamboo baskets."], ans: 2 },
+          { q: "How do the tools used in Nirok Nanggok reflect environmental awareness?", opts: ["They are made of plastic to last longer.", "They are modern machines that catch everything.", "Selective tools preventing ecosystem destruction.", "They require electricity to work.", "They are imported from other countries."], ans: 2 },
+          { q: "What is the significance of the 'togetherness' mentioned in the text?", opts: ["It shows that people are forced to work together.", "It highlights that tradition is a social glue that strengthens community bonds.", "It means that the fish are very heavy and need many people to lift.", "It suggests that the river is too dangerous for one person.", "It indicates that people are competing to be the richest."], ans: 1 },
+          { q: "Why must the participants wait for a signal from the Dukun Air?", opts: ["Because the Dukun Air owns all the fish.", "Maintaining sacred order and ancestral traditions.", "Because the water is too hot to enter.", "To wait for the cameras to start filming.", "Because the fish are sleeping."], ans: 1 }
+        ]
+      },
+      {
+        title: "🎨 Level 4: The Artisan's Riddle",
+        context: `The Master Artisans of Membalong are not only skilled with their hands but also with their words. To prove your understanding of traditional crafts and tools, you must solve their ancient riddles. 
+
+Read each riddle carefully, visualize the object being described, and type your answer. Think about the traditional woven mats, ceremonial food covers, harvest baskets, traditional fishing spears, and musical instruments that shape the daily lives and culture of the Belitung people.`,
+        questions: [
+          { 
+            type: "text",
+            q: "\"I am born in the damp swamps of Membalong, but I must die under the hot sun to become strong. Once my thorns are removed and my skin is boiled, hands move skillfully to weave me into patterns. I have no legs, but I am always on the floor, welcoming guests to sit and share a meal. I am cool to the touch on a humid night. What am I?\"", 
+            correctAnswerText: "Tikar / Woven Mat",
+            check: function(ans) {
+              let a = ans.toLowerCase();
+              return a.includes("tikar") || a.includes("mat");
+            }
+          },
+          { 
+            type: "text",
+            q: "\"I am shaped like a colorful mountain or a wide dome. I wear bright red paint and golden patterns to look beautiful at a Makan Bedulang ceremony. I have no mouth, but I protect your delicious Gangan from the flies. I have no feet, but I sit proudly at the center of the tray. What am I?\"", 
+            correctAnswerText: "Tudung Saji / Food Cover",
+            check: function(ans) {
+              let a = ans.toLowerCase();
+              return a.includes("tudung") || a.includes("saji") || a.includes("cover");
+            }
+          },
+          { 
+            type: "text",
+            q: "\"I am made from sturdy rattan or bamboo, woven tightly to be your loyal companion. I have a hollow body and a wide mouth, but I never eat. Instead, I carry the weight of the harvest—coconuts, vegetables, or firewood—on your back as you walk through the forest trails. I am the silent helper of the farmers. What am I?\"", 
+            correctAnswerText: "Basket / Raga / Ambong",
+            check: function(ans) {
+              let a = ans.toLowerCase();
+              return a.includes("basket") || a.includes("raga") || a.includes("ambong") || a.includes("bakul") || a.includes("lanjung");
+            }
+          },
+          { 
+            type: "text",
+            q: "\"I am long, thin, and straight like a soldier. My body is made of wood, but my tooth is made of sharp iron. I do not like the dry land; I prefer the muddy rivers and the swampy waters during the dry season. When the Dukun Air gives the signal, I dive into the mud to find the hiding fish. What am I?\"", 
+            correctAnswerText: "Tirok / Spear",
+            check: function(ans) {
+              let a = ans.toLowerCase();
+              return a.includes("tirok") || a.includes("spear");
+            }
+          },
+          { 
+            type: "text",
+            q: "\"I am carved from a single piece of wood, often shaped like the head of a deer. I have strings but no voice of my own; I need your fingers to make me sing. When the Gendang starts to beat, I provide the melody that makes people dance and remember the stories of old Belitung. What am I?\"", 
+            correctAnswerText: "Gambus / Dambus",
+            check: function(ans) {
+              let a = ans.toLowerCase();
+              return a.includes("gambus") || a.includes("dambus") || a.includes("daubs") || a.includes("lute");
+            }
+          }
+        ]
+      },
+      {
+        title: "🍡 Level 5: The Sweet Floating Delight",
+        context: `Belitung is not just about savory seafood; it also has a "sweet tooth." One of the most beloved traditional desserts is "Bugis Berendam." The name literally means "The Bugis who is soaking." This culinary delight consists of soft, chewy rice flour balls filled with sweet grated coconut, served in a "bath" of thick, salty-sweet coconut milk sauce.\n\nThere is a small discussion among food lovers about Bugis Berendam. Some people argue that the authentic Bugis Berendam must be made using natural coloring from "Supro" or Pandan leaves to give it a green hue. They believe that modern food coloring ruins the traditional aroma. On the other hand, younger generations sometimes experiment with different colors like purple (from purple sweet potato) to make it more "Instagrammable" and appealing to tourists.\n\nAnother point of discussion is the texture of the sauce. Traditionalists insist the sauce must be very thick and slightly salty to contrast with the very sweet filling of the balls. However, some health-conscious consumers suggest reducing the thick coconut milk (santan) to make it lighter and lower in cholesterol.\n\nDespite these different opinions, Bugis Berendam remains a star at local weddings and during the Maras Tahun festival. It represents the "sweetness" of life and the richness of Belitung's agricultural products, particularly coconuts. Whether you like it traditional or modern, the sensation of the soft ball bursting with sweet coconut sugar in your mouth is an experience no one should miss.`,
+        questions: [
+          { q: "What is the literal meaning of \"Bugis Berendam\"?", opts: ["The Bugis who is sleeping.", "The Bugis who is soaking.", "The Bugis who is cooking.", "The Bugis who is dancing.", "The Bugis who is sailing."], ans: 1 },
+          { q: "What is inside the rice flour balls of Bugis Berendam?", opts: ["Salty fish meat.", "Fresh pineapple slices.", "Sweet grated coconut.", "Peanut butter.", "Melted chocolate."], ans: 2 },
+          { q: "Why do some people prefer using Pandan leaves instead of modern food coloring?", opts: ["Because Pandan leaves are more expensive.", "Because modern coloring makes the balls too hard.", "Providing natural color and traditional aroma.", "Because they don't have access to modern shops.", "Because Pandan leaves make the dessert spicy."], ans: 2 },
+          { q: "What is the main conflict of opinion regarding the sauce of Bugis Berendam?", opts: ["Whether the sauce should be hot or cold.", "Thick, salty sauce versus lighter versions.", "Whether the sauce should be replaced with plain water.", "Whether the sauce should be eaten with rice.", "Whether the sauce should be colored blue."], ans: 1 },
+          { q: "In the context of Belitung culture, what does Bugis Berendam represent?", opts: ["The difficulty of finding food in the forest.", "The influence of foreign fast-food chains.", "Sweetness of life and natural abundance.", "The competition between different villages.", "The lack of creativity in local cooking."], ans: 2 }
+        ]
+      },
+      {
+        title: "🗺️ Level 6: The Legend of Putri Pinang Gading",
+        isAudio: true,
+        context: `Long ago, in the Belantu region of Belitung, there lived a beautiful and brave princess named Putri Pinang Gading. She was not an ordinary princess who stayed inside the palace. She was known for her incredible skill in archery and her deep love for her people.\n\nOne year, the kingdom was struck by a terrible disaster. A giant, mystical bird known as "Burung Garuda" (not the national symbol, but a predatory legend) began to terrorize the villages. The bird was so large that its wings could block the sun, and it snatched livestock and even humans. The King was desperate, and many brave warriors had failed to defeat the beast.\n\nPutri Pinang Gading could not stand to see her people suffer. She took her magical bow and arrows and headed toward the highest hill. She waited patiently for the shadow of the giant bird to appear. When the wind began to howl and the sky turned dark, she knew the monster had arrived. With a steady hand and a prayer to the Almighty, she released an arrow that struck the bird’s heart. The giant bird fell, and the land was finally at peace.\n\nTo honor her bravery, the people named the area and several local landmarks after her story. Putri Pinang Gading remains a symbol of women's strength in Belitung folklore. She proved that leadership and courage do not belong to men alone, and that true beauty lies in the willingness to sacrifice for others.`,
+        questions: [
+          { q: "What was Putri Pinang Gading's special skill?", opts: ["Singing and dancing", "Cooking Gangan", "Archery", "Weaving Tikar Lais", "Swimming"], ans: 2 },
+          { q: "What was the main problem faced by the kingdom in the story?", opts: ["A great flood", "A mystical bird terrorizing the kingdom.", "A war with a neighboring island", "A long period of hunger", "The King lost his golden crown"], ans: 1 },
+          { q: "How did the Princess defeat the monster?", opts: ["She trapped it in a giant net.", "She poisoned its food.", "She shot it in the heart with a magical arrow.", "She talked to the bird and made peace.", "She asked the Dukun Air for help."], ans: 2 },
+          { q: "What is the moral lesson of the legend of Putri Pinang Gading?", opts: ["Princesses should stay in the palace for safety.", "Archery is the only way to become a leader.", "Leadership requires courage, regardless of gender.", "Birds are dangerous animals that must be hunted.", "Magic is the only way to solve problems."], ans: 2 },
+          { q: "Why is this story still told to children in Belitung today?", opts: ["To make them afraid of large birds.", "To promote the sale of bows and arrows.", "To preserve identity and inspire bravery.", "To explain why the sun disappears sometimes.", "To teach them how to become a King."], ans: 2 }
+        ]
+      },
+      {
+        title: "🌿 Level 7: The Eco-Tourism Peak",
+        context: `If you want to experience the "cool" side of Belitung, you must hike Gunung Kubing. Located in the Perpat Hill area, Gunung Kubing is an eco-tourism destination that focuses on forest conservation. It is managed by the local community who transformed a former logging area into a beautiful protected forest.\n\nThe hike to the top of Gunung Kubing is quite pleasant. The path is well-maintained and surrounded by giant trees that provide shade. Along the way, you can see various types of flora, including wild orchids and the famous "Kayu Gaharu" (agarwood). The local guides are very knowledgeable; they use a digital application to help tourists identify the trees, showing a perfect blend of tradition and technology.\n\nThe main attraction of Gunung Kubing is the "Natural Bath" at the summit. There are large granite basins that naturally collect cold mountain water. Hikers can soak their tired feet or even swim in these pools while looking at the green hills below. The water is so clear and refreshing that it feels like a natural spa.\n\nGunung Kubing is a successful example of how tourism can save the environment. Instead of cutting down trees for timber, the locals now earn a living by protecting them and guiding tourists. It teaches us that nature is more valuable when it is kept alive and healthy.`,
+        questions: [
+          { q: "Where is Gunung Kubing located?", opts: ["Near the beach", "In the Perpat Hill area", "In the middle of Tanjung Pandan city", "On top of Batu Baginde", "In the Gadong Hill, Lasar"], ans: 1 },
+          { q: "What makes the management of Gunung Kubing unique?", opts: ["It is managed by a foreign company.", "It uses modern robots to clean the forest.", "Traditional values meets digital management.", "It is a place where people are allowed to cut trees.", "It only opens during the night."], ans: 2 },
+          { q: "What is the \"Natural Bath\" mentioned in the text?", opts: ["A swimming pool made of plastic.", "A bathroom inside a hotel.", "Natural granite basins at the summit that collect mountain water.", "A river at the bottom of the hill.", "A place to wash clothes."], ans: 2 },
+          { q: "How has the community's economy changed because of Gunung Kubing?", opts: ["They became poorer because they stopped logging.", "They now rely on selling wood to tourists.", "Economic shift toward sustainable ecotourism.", "They moved to the city to find better jobs.", "They started a fish farm on top of the mountain."], ans: 2 },
+          { q: "What is the broader message of the Gunung Kubing eco-tourism project?", opts: ["Hiking is only for young people.", "Technology should replace nature.", "Economic benefits through sustainable preservation.", "Forests are only useful for their water.", "Modern apps are more important than trees."], ans: 2 }
+        ]
+      },
+      {
+        title: "🗣️ Level 8: The Harvest Celebration (Speaking Test)",
+        isAudioQuestion: true,
+        context: `Alex is an exchange student from Australia while Aji is a high school student from SMAN 1 Membalong.\n\nThe Situation: The village is celebrating a cultural festival day, and the local community is preparing for the annual Maras Taun (Harvest Festival) in the village field nearby. Alex is amazed by the lively atmosphere, the aromatic smell of local food, and the unique traditions he sees.\n\nInstructions for the Student:\n1. Listen to or read the statement/question from Alex.\n2. Choose the correct response among the five options (A, B, C, D, or E) based on the dialogue.\n3. Speak your choice by pressing the mic icon. Read the correct response aloud with clear pronunciation and good intonation.`,
+        questions: [
+          { 
+            type: "speaking",
+            q: "Alex: \"I know Maras Taun is connected to the harvest, but could you tell me more about the deeper meaning behind it?\"", 
+            opts: [
+              "It means we have to cut all the trees in Membalong to prepare for the massive new year celebration.",
+              "Maras means to clear past hardships and Taun means year. It is a festival of gratitude and a prayer for harmony.",
+              "Maras Taun is just a regular food festival where people cook local fish and sell them to tourists.",
+              "Maras Taun is a special day to celebrate the exchange students who come from Australia to Belitung.",
+              "It is a traditional competition to see who can harvest the most rice in the village field."
+            ], 
+            check: function(ans) {
+              let a = ans.toLowerCase();
+              return (a.includes("clear") && a.includes("past")) || a.includes("gratitude") || a.includes("harmony");
+            } 
+          },
+          { 
+            type: "speaking",
+            q: "Alex: \"I saw people carrying big covered trays. Is there a special food tradition?\"", 
+            opts: [
+              "No, those trays are only used to transport fresh fishes from the Membalong river to the market.",
+              "Yes, we call it Lepat Gede, where people carry huge tables around the village field.",
+              "Yes! That is for Makan Bedulang, where one tray is shared by four people sitting together.",
+              "Yes, it is a modern cooking competition where judges give scores to the best local chefs.",
+              "No, those are just empty plates used as decorations to welcome visitors to the school yard."
+            ], 
+            check: function(ans) {
+              let a = ans.toLowerCase();
+              return a.includes("shared") && (a.includes("four") || a.includes("tray") || a.includes("together") || a.includes("bedulang"));
+            } 
+          },
+          { 
+            type: "speaking",
+            q: "Alex: \"Fascinating! So, what kind of traditional food is inside the Dulang?\"", 
+            opts: [
+              "We usually serve sweet Kue Cucur mixed with hot chili and local fried chicken inside the tray.",
+              "Inside the Dulang, you can only find raw vegetables and fruits harvested from the pandan forest.",
+              "It contains a western seafood salad with avocado and special mayonnaise sauce from Belitung.",
+              "The star is Gangan, a yellow fish soup made with fresh fish, turmeric, shrimp paste, and sour eggplant.",
+              "The main dish is grilled catfish served with sweet chocolate sauce and local palm sugar."
+            ], 
+            check: function(ans) {
+              let a = ans.toLowerCase();
+              return (a.includes("yellow") && a.includes("fish")) || a.includes("shrimp") || a.includes("eggplant");
+            } 
+          },
+          { 
+            type: "speaking",
+            q: "Alex: \"Yum! That sounds very aromatic. Oh, by the way, I saw some people boiling huge packages wrapped in woven green leaves over there. What is that?\"", 
+            opts: [
+              "That is Gangan Gede, a giant fish head that we boil outside for the village leader.",
+              "Oh! That is the most important icon of the festival, called Lepat, which is wrapped in woven pandan leaves.",
+              "Those are Simpor leaves used to wrap spicy salted fish before we grill them on firewood.",
+              "That is just a traditional decoration made of coconut leaves to welcome tourists to Membalong.",
+              "It is a package of traditional sticky rice wrapped in plastic to keep it clean during the festival."
+            ], 
+            check: function(ans) {
+              let a = ans.toLowerCase();
+              return a.includes("important icon") || (a.includes("woven") && a.includes("leaves")) || a.includes("pandan");
+            } 
+          },
+          { 
+            type: "speaking",
+            q: "Alex: \"Wow, so Lepat wrapped in pandan leaves is like the ultimate symbol of Maras Taun! What does it symbolize?\"", 
+            opts: [
+              "Exactly! The woven pandan leaves symbolize unity and togetherness, and leaving the old year behind.",
+              "It symbolizes that we must stop eating rice and start eating pandan leaves for the whole year.",
+              "It is a symbol of competition to see who can make the fastest woven package in the school yard.",
+              "It means the village leader wants to show everyone how to use a sharp knife safely.",
+              "It symbolizes the number of heavy hardships that the villagers must face in the upcoming year."
+            ], 
+            check: function(ans) {
+              let a = ans.toLowerCase();
+              return (a.includes("unity") && a.includes("togetherness")) || (a.includes("leaving") && a.includes("old year")) || a.includes("exactly");
+            } 
+          }
+        ]
+      },
+      {
+        title: "🗣️ Level 9: The Ancient Dialect",
+        context: `To truly understand the people of Membalong, one must understand their language. The Belantu dialect holds the ancient roots of the local culture, preserving words that have been passed down through generations of islanders. It is a unique linguistic heritage that blends regional Malay with specific indigenous vocabulary not found anywhere else.\n\nIn this challenge, you must prove your connection to the ancestors by translating these local Belantu words into English. Carefully read each word and select the correct English meaning from the options provided.`,
+        questions: [
+          { q: "What is the English from Belantu dialect for word “BICANG”?", opts: ["terrace", "window", "bag", "cabinet", "ventilation"], ans: 2 },
+          { q: "What is the English from Belantu dialect for word “SUYOK”?", opts: ["terrace", "window", "bag", "cabinet", "ventilation"], ans: 0 },
+          { q: "What is the English from Belantu dialect for word “LUNGUP”?", opts: ["terrace", "window", "bag", "cabinet", "ventilation"], ans: 1 },
+          { q: "What is the English from Belantu dialect for word “MPUNGAS”?", opts: ["headache", "washing face", "tell a lie", "dirty", "a moment"], ans: 1 },
+          { q: "What is the English from Belantu dialect for word “MPINGAU”?", opts: ["headache", "washing face", "tell a lie", "dirty", "sleeping"], ans: 0 },
+          { q: "What is the English from Belantu dialect for word “RAMANGIN”?", opts: ["terrace", "window", "bag", "cabinet", "ventilation"], ans: 4 },
+          { q: "What is the English from Belantu dialect for word “CELIBER”?", opts: ["headache", "washing face", "tell a lie", "dirty", "sleeping"], ans: 3 },
+          { q: "What is the English from Belantu dialect for word “GERUBOK”?", opts: ["terrace", "window", "bag", "cabinet", "ventilation"], ans: 3 },
+          { q: "What is the English from Belantu dialect for word “MUTAK”?", opts: ["headache", "washing face", "tell a lie", "dirty", "sleeping"], ans: 4 },
+          { q: "What is the English from Belantu dialect for word “TEGEL”?", opts: ["headache", "washing face", "tell a lie", "a moment", "sleeping"], ans: 3 }
+        ]
+      },
+      {
+        title: "⚔️ Level 10: The Duel of Honor",
+        context: `Beripat Beregong is a traditional martial art and game from Belitung that showcases bravery, skill, and sportsmanship. It is usually performed during the Maras Tahun festival. Unlike modern wrestling, Beripat Beregong involves two men "fighting" using a whip made from rattan. Although it looks dangerous, it is governed by strict rules and deep mutual respect.\n\nHow to Conduct a Beripat Beregong Match:\n- Preparation: Two men (the players) prepare themselves by wearing traditional headcloths and sarongs. They carry a whip made from sturdy rattan.\n- The Arena: The match takes place on a high wooden stage or a cleared square.\n- The Music: The match must be accompanied by the sound of "Gong" and "Gendang." The rhythm of the music dictates the pace of the duel.\n- The Rules: The players take turns trying to strike each other's backs with the rattan whip. They are not allowed to hit the head, face, or below the waist.\n- The Defense: While one player strikes, the other must use his agility to dodge or block the blow.\n- The Judging: A referee, usually an elder or a Dukun, watches closely. The winner is determined by who has the fewest marks or wounds on their back.\n- The Conclusion: After the match ends, the two players must hug each other. This is the most important part—it shows that there is no hatred or grudge between them.\n\nBeripat Beregong is more than just a fight; it is a test of a man's endurance and his ability to control his emotions under pressure.`,
+        questions: [
+          { 
+            type: "text",
+            q: "What is the whip used in Beripat Beregong made of?", 
+            correctAnswerText: "Sturdy rattan",
+            check: function(ans) {
+              let a = ans.toLowerCase();
+              return a.includes("rattan") || a.includes("rotan");
+            }
+          },
+          { 
+            type: "text",
+            q: "According to the text, what instruments must accompany the match?", 
+            correctAnswerText: "Gong and Gendang",
+            check: function(ans) {
+              let a = ans.toLowerCase();
+              return a.includes("gong") && a.includes("gendang");
+            }
+          },
+          { 
+            type: "text",
+            q: "Jumbled Words: allowed - hit - they - not - face - are - to - the", 
+            correctAnswerText: "They are not allowed to hit the face",
+            check: function(ans) {
+              let a = ans.toLowerCase().replace(/[^a-z0-9\s]/g, '').trim();
+              return a === "they are not allowed to hit the face";
+            }
+          },
+          { 
+            type: "text",
+            q: "Jumbled Words: winner - fewest - determined - the - by - is - wounds - the", 
+            correctAnswerText: "The winner is determined by the fewest wounds",
+            check: function(ans) {
+              let a = ans.toLowerCase().replace(/[^a-z0-9\s]/g, '').trim();
+              return a === "the winner is determined by the fewest wounds";
+            }
+          },
+          { 
+            type: "text",
+            q: "Order these events chronologically:\n\nA. After the match ends, the two players must hug each other to show there is no grudge.\nB. Two men prepare themselves by wearing traditional headcloths and carrying rattan whips.\nC. A referee or Dukun watches closely to determine the winner by the fewest marks on the back.\nD. The players take turns trying to strike each other's backs following the rhythm of the music.\n\nType the correct order of the letters (e.g., ABCD or A-B-C-D):", 
+            correctAnswerText: "B - D - C - A",
+            check: function(ans) {
+              let a = ans.toLowerCase().replace(/[^a-d]/g, ''); // Extract only a, b, c, d
+              return a === "bdca";
+            }
+          }
+        ]
+      }
+    ];
+
+    let isPlayingAudio = false;
+
+    // Memuat daftar suara di awal agar sistem TTS siap
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.onvoiceschanged = () => {
+        window.speechSynthesis.getVoices();
+      };
+    }
+
+    // Fungsi khusus untuk mengatur suara menjadi British Male
+    function applyBritishMaleVoice(utterance) {
+      utterance.lang = 'en-GB';
+      const voices = window.speechSynthesis.getVoices();
+      
+      // Prioritas 1: Aksen British & Suara Laki-laki
+      let selectedVoice = voices.find(v => (v.lang === 'en-GB' || v.lang === 'en_GB') && v.name.toLowerCase().includes('male'));
+      
+      // Prioritas 2: Aksen British apa saja (jika suara spesifik pria tidak ditemukan di browser tertentu)
+      if (!selectedVoice) {
+        selectedVoice = voices.find(v => v.lang === 'en-GB' || v.lang === 'en_GB');
+      }
+      
+      // Prioritas 3: Suara Inggris Laki-laki aksen lainnya
+      if (!selectedVoice) {
+        selectedVoice = voices.find(v => v.lang.startsWith('en-') && v.name.toLowerCase().includes('male'));
+      }
+
+      if (selectedVoice) {
+        utterance.voice = selectedVoice;
+      }
+    }
+
+    function stopAudio() {
+      if (window.speechSynthesis && window.speechSynthesis.speaking) {
+        window.speechSynthesis.cancel();
+      }
+      isPlayingAudio = false;
+      const btn = document.getElementById('btn-play-audio');
+      if (btn) btn.innerHTML = '▶️ Play Audio';
+    }
+
+    function playText(text) {
+      stopAudio(); // Hentikan audio cerita jika sedang berjalan
+      const utterance = new SpeechSynthesisUtterance(text);
+      applyBritishMaleVoice(utterance); // Menggunakan suara British Male
+      utterance.rate = 0.9;
+      window.speechSynthesis.speak(utterance);
+    }
+
+    function toggleAudio() {
+      if (!currentUtterance) return;
+      
+      if (window.speechSynthesis.speaking) {
+        if (window.speechSynthesis.paused) {
+          window.speechSynthesis.resume();
+          isPlayingAudio = true;
+          document.getElementById('btn-play-audio').innerHTML = '⏸️ Pause Audio';
+        } else {
+          window.speechSynthesis.pause();
+          isPlayingAudio = false;
+          document.getElementById('btn-play-audio').innerHTML = '▶️ Resume Audio';
+        }
+      } else {
+        window.speechSynthesis.speak(currentUtterance);
+        isPlayingAudio = true;
+        document.getElementById('btn-play-audio').innerHTML = '⏸️ Pause Audio';
+      }
+    }
+
+    function showScreen(screenId) {
+      stopAudio(); // Stop audio when navigating away
+      document.querySelectorAll('#app > div').forEach(el => el.style.display = 'none');
+      document.getElementById(screenId).style.display = 'flex';
+      window.scrollTo(0, 0);
+    }
+
+    function generateBonusCode() {
+      return Math.floor(Math.random() * 10); // Returns 0-9
+    }
+
+    // --- NAVIGATION LOGIC ---
+    function goHome() {
+      showScreen('screen-home');
+    }
+
+    function goToRules() {
+      showScreen('screen-rules');
+    }
+
+    function goToNameInput() {
+      showScreen('screen-name-input');
+      // Reset selections visually
+      document.getElementById('btn-mode-individual').classList.add('bg-blue-900/50', 'scale-105', 'border-blue-400');
+      document.getElementById('btn-mode-individual').classList.remove('bg-blue-900/30', 'border-blue-500/30');
+      document.getElementById('btn-mode-team').classList.remove('bg-purple-900/50', 'scale-105', 'border-purple-400');
+      document.getElementById('btn-mode-team').classList.add('bg-purple-900/30', 'border-purple-500/30');
+    }
+
+    function selectGameMode(mode) {
+      gameMode = mode;
+      const container = document.getElementById('name-inputs-container');
+      
+      // Update Button Styles
+      if(mode === 'individual') {
+        document.getElementById('btn-mode-individual').classList.add('bg-blue-900/50', 'scale-105', 'border-blue-400');
+        document.getElementById('btn-mode-individual').classList.remove('bg-blue-900/30', 'border-blue-500/30');
+        
+        document.getElementById('btn-mode-team').classList.remove('bg-purple-900/50', 'scale-105', 'border-purple-400');
+        document.getElementById('btn-mode-team').classList.add('bg-purple-900/30', 'border-purple-500/30');
+        
+        container.innerHTML = `
+          <div>
+            <label class="block text-amber-300 mb-2 font-bold">Player Name</label>
+            <input type="text" id="player-name-1" class="w-full bg-gray-900/50 border border-amber-500/50 rounded-lg p-3 text-white focus:outline-none focus:border-amber-400" placeholder="Enter your name...">
+          </div>
+        `;
+      } else {
+        document.getElementById('btn-mode-team').classList.add('bg-purple-900/50', 'scale-105', 'border-purple-400');
+        document.getElementById('btn-mode-team').classList.remove('bg-purple-900/30', 'border-purple-500/30');
+        
+        document.getElementById('btn-mode-individual').classList.remove('bg-blue-900/50', 'scale-105', 'border-blue-400');
+        document.getElementById('btn-mode-individual').classList.add('bg-blue-900/30', 'border-blue-500/30');
+
+        container.innerHTML = `
+          <div>
+            <label class="block text-amber-300 mb-2 font-bold">Team Name</label>
+            <input type="text" id="player-name-1" class="w-full bg-gray-900/50 border border-amber-500/50 rounded-lg p-3 text-white focus:outline-none focus:border-amber-400" placeholder="Enter team name...">
+          </div>
+          <div>
+            <label class="block text-amber-300 mb-2 font-bold">Members (Comma separated)</label>
+            <input type="text" id="player-name-2" class="w-full bg-gray-900/50 border border-amber-500/50 rounded-lg p-3 text-white focus:outline-none focus:border-amber-400" placeholder="e.g. Andi, Budi, Citra">
+          </div>
+        `;
+      }
+    }
+
+    function startChallenge() {
+      const name1 = document.getElementById('player-name-1').value.trim();
+      if(!name1) {
+        // Simple visual feedback instead of alert
+        const inputField = document.getElementById('player-name-1');
+        inputField.classList.add('animate-shake', 'border-red-500');
+        setTimeout(() => inputField.classList.remove('animate-shake', 'border-red-500'), 500);
+        return;
+      }
+      
+      if(gameMode === 'individual') {
+        playerNames = [name1];
+        document.getElementById('player-display').innerText = `Agent: ${name1}`;
+      } else {
+        const members = document.getElementById('player-name-2') ? document.getElementById('player-name-2').value : '';
+        playerNames = [name1, members];
+        document.getElementById('player-display').innerText = `Team: ${name1}`;
+      }
+
+      // Reset Game Variables
+      currentLevel = 0;
+      totalScore = 0;
+      collectedCodes = [];
+      lives = 7;
+      vaultAttempts = 0;
+      
+      loadLevel();
+    }
+
+    function loadLevel() {
+      if(currentLevel >= levelData.length) {
+        showVaultScreen();
+        return;
+      }
+
+      currentQuestion = 0;
+      levelCorrectAnswers = 0;
+      
+      updateStatsUI();
+      document.getElementById('level-title-display').innerText = levelData[currentLevel].title;
+      
+      const textContextView = document.getElementById('text-context-view');
+      const audioContextView = document.getElementById('audio-context-view');
+
+      // Check if level is Audio-based
+      if (levelData[currentLevel].isAudio) {
+        textContextView.style.display = 'none';
+        audioContextView.style.display = 'block';
+        
+        // Setup Speech Synthesis
+        currentUtterance = new SpeechSynthesisUtterance(levelData[currentLevel].context);
+        applyBritishMaleVoice(currentUtterance); // Menggunakan suara British Male
+        currentUtterance.rate = 0.9; // Slightly slower for better listening comprehension
+        currentUtterance.onend = () => {
+          isPlayingAudio = false;
+          document.getElementById('btn-play-audio').innerHTML = '▶️ Replay Audio';
+        };
+      } else {
+        textContextView.style.display = 'block';
+        audioContextView.style.display = 'none';
+        document.getElementById('context-text').innerText = levelData[currentLevel].context;
+      }
+      
+      loadQuestion();
+      showScreen('screen-level');
+    }
+
+    function updateStatsUI() {
+      document.getElementById('lives-remaining').innerText = lives;
+      document.getElementById('score-display').innerText = totalScore;
+      
+      // Visual danger when lives are low
+      const livesContainer = document.getElementById('lives-container');
+      if(lives <= 3) {
+        livesContainer.classList.add('bg-red-600/60', 'animate-pulse');
+        livesContainer.classList.remove('bg-red-900/40');
+      } else {
+        livesContainer.classList.remove('bg-red-600/60', 'animate-pulse');
+        livesContainer.classList.add('bg-red-900/40');
+      }
+    }
+
+    function loadQuestion() {
+      questionAnswered = false;
+      const level = levelData[currentLevel];
+      const qData = level.questions[currentQuestion];
+      const totalQ = level.questions.length;
+      
+      document.getElementById('question-number').innerText = currentQuestion + 1;
+      document.getElementById('progress-text').innerText = `Progress: ${currentQuestion}/${totalQ}`;
+      document.getElementById('progress-bar').style.width = `${(currentQuestion / totalQ) * 100}%`;
+      
+      // Reset Hint Container
+      document.getElementById('hint-container').style.display = 'none';
+      const btnHint = document.getElementById('btn-hint');
+      btnHint.innerHTML = '✨ <span class="hidden sm:inline">Consult Ancestors</span>';
+      btnHint.disabled = false;
+      btnHint.classList.remove('opacity-50', 'cursor-not-allowed');
+
+      const qTextElement = document.getElementById('question-text');
+      if (level.isAudio) {
+        const escapedQ = qData.q.replace(/"/g, '&quot;');
+        qTextElement.innerHTML = `${currentQuestion + 1}. <button onclick="playText(this.dataset.text)" data-text="${escapedQ}" class="bg-indigo-600 hover:bg-indigo-700 text-white rounded-full px-5 py-2 ml-2 text-base md:text-lg inline-flex items-center gap-2 transition-all shadow-[0_0_10px_rgba(79,70,229,0.5)]"><span>🔊</span> Listen to Question</button>`;
+      } else if (level.isAudioQuestion) {
+        // Special rendering for Level 8 (Shows question text + a Play Audio button for Alex's line)
+        const escapedQ = qData.q.replace(/"/g, '&quot;');
+        qTextElement.innerHTML = `<div class="mb-3">${currentQuestion + 1}. ${qData.q.replace(/\n/g, '<br>')}</div> <button onclick="playText(this.dataset.text)" data-text="${escapedQ}" class="bg-indigo-600 hover:bg-indigo-700 text-white rounded-full px-5 py-2 text-sm md:text-base inline-flex items-center gap-2 transition-all shadow-[0_0_10px_rgba(79,70,229,0.5)]"><span>🔊</span> Listen to Alex</button>`;
+      } else {
+        // Use innerHTML instead of innerText to properly render line breaks for the ordering question
+        qTextElement.innerHTML = `${currentQuestion + 1}. ${qData.q.replace(/\n/g, '<br>')}`;
+      }
+      
+      const optionsContainer = document.getElementById('options-container');
+      optionsContainer.innerHTML = '';
+      
+      const feedback = document.getElementById('feedback-message');
+      feedback.style.opacity = '0';
+      
+      if (qData.type === 'text') {
+        const inputDiv = document.createElement('div');
+        inputDiv.className = "flex flex-col gap-4";
+        
+        const inputField = document.createElement('textarea');
+        inputField.id = "text-answer-input";
+        inputField.className = "w-full bg-gray-900/80 border border-amber-500/50 rounded-lg p-4 text-white focus:outline-none focus:border-amber-400 min-h-[100px] resize-y";
+        inputField.placeholder = "Type your answer here...";
+        
+        const submitBtn = document.createElement('button');
+        submitBtn.className = "bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 px-6 rounded-lg transition-all self-end shadow-[0_0_10px_rgba(245,158,11,0.3)]";
+        submitBtn.innerText = "Submit Answer";
+        submitBtn.onclick = () => submitTextAnswer(qData);
+        
+        inputDiv.appendChild(inputField);
+        inputDiv.appendChild(submitBtn);
+        optionsContainer.appendChild(inputDiv);
+      } else if (qData.type === 'speaking') {
+        const speakingDiv = document.createElement('div');
+        speakingDiv.className = "flex flex-col gap-4 items-center bg-indigo-900/20 p-6 rounded-lg border border-indigo-500/30";
+        
+        // Header petunjuk
+        const hintText = document.createElement('p');
+        hintText.className = "text-indigo-300 font-bold mb-2 text-center";
+        hintText.innerHTML = "🗣️ Speaking Test: Read the correct option aloud!";
+        speakingDiv.appendChild(hintText);
+
+        // Tampilkan opsi sebagai daftar teks biasa (bukan tombol klik)
+        const optsList = document.createElement('div');
+        optsList.className = "w-full space-y-2 mb-4";
+        qData.opts.forEach((opt, index) => {
+          const optItem = document.createElement('div');
+          optItem.className = "p-3 bg-gray-800/60 rounded border border-gray-600 text-amber-100 text-sm md:text-base";
+          optItem.innerText = String.fromCharCode(65 + index) + ". " + opt;
+          optsList.appendChild(optItem);
+        });
+        speakingDiv.appendChild(optsList);
+
+        // Tombol Mic
+        const micBtn = document.createElement('button');
+        micBtn.id = "btn-mic";
+        micBtn.className = "bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-8 rounded-full transition-all shadow-[0_0_15px_rgba(220,38,38,0.5)] flex items-center gap-3 text-xl";
+        micBtn.innerHTML = "🎤 <span>Tap to Speak</span>";
+        micBtn.onclick = () => startSpeakingTest(qData, micBtn);
+
+        // Tempat transkrip suara pengguna
+        const transcriptDisplay = document.createElement('p');
+        transcriptDisplay.id = "transcript-display";
+        transcriptDisplay.className = "text-amber-200 italic text-center mt-2 min-h-[1.5rem] w-full break-words";
+
+        speakingDiv.appendChild(micBtn);
+        speakingDiv.appendChild(transcriptDisplay);
+        optionsContainer.appendChild(speakingDiv);
+      } else {
+        qData.opts.forEach((opt, index) => {
+          const btn = document.createElement('button');
+          btn.className = "w-full text-left bg-gray-800/80 hover:bg-amber-900/60 border border-amber-500/30 p-4 rounded-lg transition-all text-amber-100 font-medium option-btn";
+          btn.innerText = opt;
+          btn.onclick = () => selectAnswer(index, btn);
+          optionsContainer.appendChild(btn);
+        });
+      }
+    }
+
+    // --- SPEAKING TEST LOGIC ---
+    function startSpeakingTest(qData, btn) {
+      if(questionAnswered) return;
+
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        alert("Your browser does not support Speech Recognition. Please use Google Chrome or Edge.");
+        return;
+      }
+
+      const recognition = new SpeechRecognition();
+      recognition.lang = 'en-US'; // Deteksi dalam bahasa Inggris
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
+
+      const transcriptDisplay = document.getElementById('transcript-display');
+
+      recognition.onstart = function() {
+        btn.classList.replace('bg-red-600', 'bg-green-600');
+        btn.classList.replace('hover:bg-red-700', 'hover:bg-green-700');
+        btn.innerHTML = "🎙️ <span>Listening...</span>";
+        transcriptDisplay.innerText = "Listening...";
+      };
+
+      recognition.onresult = function(event) {
+        const transcript = event.results[0][0].transcript;
+        transcriptDisplay.innerText = `You said: "${transcript}"`;
+        processSpeakingAnswer(transcript, qData, btn);
+      };
+
+      recognition.onerror = function(event) {
+        btn.classList.replace('bg-green-600', 'bg-red-600');
+        btn.classList.replace('hover:bg-green-700', 'hover:bg-red-700');
+        btn.innerHTML = "🎤 <span>Tap to Speak</span>";
+        if(event.error === 'not-allowed') {
+           transcriptDisplay.innerText = `Microphone access denied. Please allow microphone permissions.`;
+        } else {
+           transcriptDisplay.innerText = `Error: ${event.error}. Please tap to try again.`;
+        }
+      };
+
+      recognition.onend = function() {
+        if (!questionAnswered) {
+          btn.classList.replace('bg-green-600', 'bg-red-600');
+          btn.classList.replace('hover:bg-green-700', 'hover:bg-red-700');
+          btn.innerHTML = "🎤 <span>Tap to Speak</span>";
+        }
+      };
+
+      recognition.start();
+    }
+
+    function processSpeakingAnswer(transcript, qData, btn) {
+      questionAnswered = true;
+      btn.disabled = true;
+      btn.classList.add('opacity-50', 'cursor-not-allowed');
+
+      const isCorrect = qData.check(transcript);
+      const feedback = document.getElementById('feedback-message');
+
+      if(isCorrect) {
+        levelCorrectAnswers++;
+        
+        // Poin untuk Level 8 adalah 2
+        const pointsPerQuestion = 2;
+        totalScore += pointsPerQuestion;
+        
+        feedback.innerText = `Correct! +${pointsPerQuestion} pts`;
+        feedback.className = "text-center font-bold text-lg mb-4 h-8 transition-opacity opacity-100 text-green-400 animate-slide-up";
+        
+        updateStatsUI();
+        
+        setTimeout(() => {
+          advanceQuestion();
+        }, 2000);
+
+      } else {
+        lives--;
+        updateStatsUI();
+        
+        feedback.innerHTML = `Incorrect answer. Try again! You lost a life.`;
+        feedback.className = "text-center font-bold text-lg mb-4 h-auto transition-opacity opacity-100 text-red-400 animate-slide-up";
+
+        if(lives <= 0) {
+          setTimeout(() => {
+            handleLevelFailed();
+          }, 3000);
+        } else {
+          setTimeout(() => {
+            questionAnswered = false;
+            btn.disabled = false;
+            btn.classList.remove('opacity-50', 'cursor-not-allowed');
+            feedback.style.opacity = '0';
+            document.getElementById('transcript-display').innerText = '';
+          }, 3500);
+        }
+      }
+    }
+    // --- END SPEAKING TEST LOGIC ---
+
+    function submitTextAnswer(qData) {
+      if(questionAnswered) return;
+      
+      const inputField = document.getElementById('text-answer-input');
+      const userAnswer = inputField.value.trim();
+      
+      if(!userAnswer) {
+        inputField.classList.add('animate-shake', 'border-red-500');
+        setTimeout(() => inputField.classList.remove('animate-shake', 'border-red-500'), 500);
+        return;
+      }
+
+      questionAnswered = true;
+      inputField.disabled = true;
+
+      const isCorrect = qData.check(userAnswer);
+      const feedback = document.getElementById('feedback-message');
+      const submitBtn = inputField.nextElementSibling;
+      submitBtn.disabled = true;
+      submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+
+      if(isCorrect) {
+        inputField.classList.replace('border-amber-500/50', 'border-green-400');
+        inputField.classList.add('bg-green-900/30');
+        
+        levelCorrectAnswers++;
+        
+        // Level 9 (index 8) gives 1 point per question, other levels give 2 points
+        const pointsPerQuestion = (currentLevel === 8) ? 1 : 2;
+        totalScore += pointsPerQuestion;
+        
+        feedback.innerText = `Correct! +${pointsPerQuestion} pts`;
+        feedback.className = "text-center font-bold text-lg mb-4 h-8 transition-opacity opacity-100 text-green-400 animate-slide-up";
+        
+        updateStatsUI();
+        
+        setTimeout(() => {
+          advanceQuestion();
+        }, 1500);
+
+      } else {
+        inputField.classList.replace('border-amber-500/50', 'border-red-400');
+        inputField.classList.add('bg-red-900/30', 'animate-shake');
+        
+        lives--;
+        updateStatsUI();
+        
+        feedback.innerHTML = `Incorrect answer. Try again! You lost a life.`;
+        feedback.className = "text-center font-bold text-lg mb-4 h-auto transition-opacity opacity-100 text-red-400 animate-slide-up";
+
+        if(lives <= 0) {
+          setTimeout(() => {
+            handleLevelFailed();
+          }, 3000);
+        } else {
+          setTimeout(() => {
+            questionAnswered = false;
+            inputField.disabled = false;
+            submitBtn.disabled = false;
+            submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            inputField.classList.replace('border-red-400', 'border-amber-500/50');
+            inputField.classList.remove('bg-red-900/30', 'animate-shake');
+            feedback.style.opacity = '0';
+          }, 3500);
+        }
+      }
+    }
+
+    function selectAnswer(selectedIndex, btnElement) {
+      if(questionAnswered) return; // Prevent multiple clicks
+      
+      const level = levelData[currentLevel];
+      const qData = level.questions[currentQuestion];
+      const isCorrect = (selectedIndex === qData.ans);
+      const feedback = document.getElementById('feedback-message');
+      
+      questionAnswered = true; // Lock options
+
+      if(isCorrect) {
+        btnElement.classList.remove('bg-gray-800/80', 'border-amber-500/30');
+        btnElement.classList.add('bg-green-600/80', 'border-green-400', 'text-white', 'shadow-[0_0_15px_rgba(74,222,128,0.4)]');
+        
+        levelCorrectAnswers++;
+        
+        // Level 9 (index 8) gives 1 point per question, other levels give 2 points
+        const pointsPerQuestion = (currentLevel === 8) ? 1 : 2;
+        totalScore += pointsPerQuestion;
+        
+        feedback.innerText = `Correct! +${pointsPerQuestion} pts`;
+        feedback.className = "text-center font-bold text-lg mb-4 h-8 transition-opacity opacity-100 text-green-400 animate-slide-up";
+        
+        updateStatsUI();
+        
+        // Auto advance after short delay
+        setTimeout(() => {
+          advanceQuestion();
+        }, 1500);
+
+      } else {
+        btnElement.classList.remove('bg-gray-800/80', 'border-amber-500/30');
+        btnElement.classList.add('bg-red-600/80', 'border-red-400', 'text-white', 'animate-shake');
+        
+        lives--;
+        updateStatsUI();
+        
+        feedback.innerText = "Incorrect answer. Try again! You lost a life.";
+        feedback.className = "text-center font-bold text-lg mb-4 h-8 transition-opacity opacity-100 text-red-400 animate-slide-up";
+
+        if(lives <= 0) {
+          setTimeout(() => {
+            handleLevelFailed();
+          }, 1500);
+        } else {
+          // Allow picking again by unlocking
+          setTimeout(() => {
+            questionAnswered = false;
+            btnElement.classList.add('opacity-50', 'cursor-not-allowed');
+            btnElement.onclick = null; // Disable just this wrong button
+            feedback.style.opacity = '0';
+          }, 1500);
+        }
+      }
+    }
+
+    function advanceQuestion() {
+      currentQuestion++;
+      const totalQ = levelData[currentLevel].questions.length;
+      if(currentQuestion >= totalQ) {
+        finishLevel();
+      } else {
+        loadQuestion();
+      }
+    }
+
+    function handleLevelFailed() {
+      const totalQ = levelData[currentLevel].questions.length;
+      document.getElementById('result-icon').innerText = '☠️';
+      document.getElementById('result-title').innerText = 'Game Over!';
+      document.getElementById('result-title').classList.replace('text-amber-300', 'text-red-400');
+      
+      document.getElementById('result-correct').innerText = `${levelCorrectAnswers}/${totalQ}`;
+      document.getElementById('result-score').innerText = 'Lives Depleted';
+      
+      document.getElementById('bonus-code-container').style.display = 'none';
+      document.getElementById('result-message').innerText = "You have lost all your lives. The ancestors demand more focus. Please restart the challenge from the beginning.";
+      
+      document.getElementById('retry-btn').style.display = 'none';
+      document.getElementById('next-level-btn').style.display = 'none';
+      
+      showScreen('screen-result');
+
+      // PANGGIL FUNGSI REKAP SAAT GAME OVER (dengan parameter true)
+      saveScoreToLeaderboard(true);
+    }
+
+    function finishLevel() {
+      const totalQ = levelData[currentLevel].questions.length;
+      const passReq = Math.ceil(totalQ * 0.8);
+      const pointsPerQuestion = (currentLevel === 8) ? 1 : 2; // Check if Level 9
+      
+      // Sembunyikan indikator Game Over jika masuk kesini (berhasil level)
+      document.getElementById('gameover-leaderboard-status').classList.add('hidden');
+
+      document.getElementById('result-icon').innerText = '✨';
+      document.getElementById('result-title').innerText = 'Level Complete!';
+      document.getElementById('result-title').classList.replace('text-red-400', 'text-amber-300');
+      
+      document.getElementById('result-correct').innerText = `${levelCorrectAnswers}/${totalQ}`;
+      document.getElementById('result-score').innerText = `+${levelCorrectAnswers * pointsPerQuestion} pts`;
+      
+      // Calculate Pass (80%)
+      if(levelCorrectAnswers >= passReq) {
+        const code = generateBonusCode();
+        collectedCodes.push(code);
+        
+        document.getElementById('bonus-code-container').style.display = 'block';
+        document.getElementById('bonus-code').innerText = code;
+        document.getElementById('result-message').innerText = "You have proven worthy of the ancestors' knowledge. Proceed to the next challenge.";
+        
+        document.getElementById('retry-btn').style.display = 'none';
+        document.getElementById('next-level-btn').style.display = 'block';
+        
+        if (currentLevel === levelData.length - 1) {
+          document.getElementById('next-level-btn').innerText = "Unlock Vault →";
+        } else {
+          document.getElementById('next-level-btn').innerText = "Next Level →";
+        }
+
+      } else {
+        // Passed lives, but didn't hit 80% mark
+        document.getElementById('result-title').innerText = 'Knowledge Insufficient';
+        document.getElementById('bonus-code-container').style.display = 'none';
+        document.getElementById('result-message').innerText = `You need at least ${passReq} correct answers to unlock the code. You got ${levelCorrectAnswers}. Please try again.`;
+        
+        document.getElementById('retry-btn').style.display = 'block';
+        document.getElementById('next-level-btn').style.display = 'none';
+        
+        // Remove points gained this round since they failed
+        totalScore -= (levelCorrectAnswers * pointsPerQuestion);
+      }
+      
+      showScreen('screen-result');
+    }
+
+    function retryLevel() {
+      // Points were already subtracted if they failed by score, 
+      // if they failed by lives, we need to subtract the points they gained this round
+      if(lives <= 0) {
+         const pointsPerQuestion = (currentLevel === 8) ? 1 : 2;
+         totalScore -= (levelCorrectAnswers * pointsPerQuestion);
+      }
+      loadLevel();
+    }
+
+    function nextLevel() {
+      currentLevel++;
+      loadLevel();
+    }
+
+    function showVaultScreen() {
+      showScreen('screen-vault');
+      document.getElementById('vault-icon').innerText = '🔒';
+      document.getElementById('vault-lock-section').classList.remove('hidden');
+      document.getElementById('vault-success-section').classList.add('hidden');
+      document.getElementById('vault-input').value = '';
+      vaultAttempts = 0; // Reset percobaan setiap kali masuk vault
+    }
+
+    function verifyVaultCode() {
+      const input = document.getElementById('vault-input').value.trim();
+      const expected = collectedCodes.join('');
+      const errorMsg = document.getElementById('vault-error');
+      
+      if (input === expected) {
+        // Success
+        document.getElementById('vault-icon').innerText = '🧰';
+        document.getElementById('vault-icon').classList.replace('animate-pulse-glow', 'animate-slide-up');
+        document.getElementById('vault-lock-section').classList.add('hidden');
+        document.getElementById('vault-success-section').classList.remove('hidden');
+        
+        // Play TTS Message
+        const successText = "Congratulations, Guardians of Membalong! You have successfully unlocked the Ancient Chest. Inside, you find a message: 'Our culture is our soul. Use your English to tell our stories to the world.' You are now ready to be a Global Ambassador for Membalong!";
+        playText(successText);
+      } else {
+        // Error
+        vaultAttempts++;
+        if (vaultAttempts >= 2) {
+          handleVaultFailed();
+        } else {
+          document.getElementById('vault-input').classList.add('animate-shake', 'border-red-500');
+          errorMsg.innerText = `Incorrect Code! ${2 - vaultAttempts} attempt(s) remaining.`;
+          errorMsg.style.opacity = '1';
+          setTimeout(() => {
+            document.getElementById('vault-input').classList.remove('animate-shake', 'border-red-500');
+            errorMsg.style.opacity = '0';
+          }, 1500);
+        }
+      }
+    }
+
+    function handleVaultFailed() {
+      document.getElementById('result-icon').innerText = '☠️';
+      document.getElementById('result-title').innerText = 'Game Over!';
+      document.getElementById('result-title').classList.replace('text-amber-300', 'text-red-400');
+      
+      document.getElementById('result-correct').innerText = `Locked`;
+      document.getElementById('result-score').innerText = `${totalScore} pts`;
+      
+      document.getElementById('bonus-code-container').style.display = 'none';
+      document.getElementById('result-message').innerText = "You entered the wrong code twice. The ancient chest is sealed forever. Your journey ends here, but your efforts will be recorded.";
+      
+      document.getElementById('retry-btn').style.display = 'none';
+      document.getElementById('next-level-btn').style.display = 'none';
+      
+      showScreen('screen-result');
+
+      // PANGGIL FUNGSI REKAP SAAT GAME OVER (dengan parameter true)
+      saveScoreToLeaderboard(true);
+    }
+
+    function showFinalScreen() {
+      stopAudio(); // Stop audio if they proceed to final screen early
+      document.getElementById('total-points').innerText = totalScore;
+      document.getElementById('final-bonus-code').innerText = collectedCodes.join(' - ');
+      showScreen('screen-final');
+
+      // Rekap data skor peserta secara otomatis
+      saveScoreToLeaderboard();
+    }
+
+  </script>
+</body>
+</html>
